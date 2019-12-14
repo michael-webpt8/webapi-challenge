@@ -48,6 +48,8 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [] Describe a Resource?
 
+- a resource is an object with a type, associated data, relationships to other resources.
+
 - [x] What can the API return to help clients know if a request was successful?
 
 - it can send back an http status code?
