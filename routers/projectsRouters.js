@@ -108,5 +108,23 @@ router.delete('/:id', (req, res) => {
  * GET ID
  * endpoint: `/project/:id`
  */
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  projectDb
+    .get(id)
+    .then(project => {
+      if (!project) {
+        return res.status(404).json({ message: 'Message with ID not found' });
+      } else {
+        res.status(200).json(project);
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ errorMessage: 'Server error getting Message with ID' });
+    });
+});
 
 module.exports = router;
