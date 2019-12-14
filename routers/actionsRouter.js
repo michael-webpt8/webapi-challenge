@@ -67,4 +67,41 @@ router.put('/:id/actions/:actionId', (req, res) => {
   });
 });
 
+/***
+ * POST
+ * ENDPOINT: `/projects/:id/actions`
+ */
+router.post('/:id/actions', (req, res) => {
+  const id = req.params.id;
+  const actionId = req.params.actionId;
+  actionDb.get(id).then(post => {
+    if (!post) {
+      return res.status(404).json({ message: 'ID not found' });
+    }
+    if (!req.body.description) {
+      return res.status(400).json({ message: 'Description required' });
+    }
+    if (!req.body.notes) {
+      return res.status(400).json({ message: 'Notes required' });
+    }
+    const postAction = {
+      project_id: id,
+      description: req.body.description,
+      notes: req.body.notes,
+      completed: req.body.completed || false
+    };
+    actionDb
+      .insert(postAction)
+      .then(post => {
+        res.status(201).json(post);
+      })
+      .catch(err => {
+        console.log(err);
+        res
+          .status(500)
+          .json({ errorMessage: 'server error Creating Action Message' });
+      });
+  });
+});
+
 module.exports = router;
