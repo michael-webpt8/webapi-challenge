@@ -12,3 +12,26 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+const express = require('express');
+const projectsRouter = require('./routers/projectsRouters');
+
+const port = process.env.PORT || 8080;
+const host = process.env.HOST || '0.0.0.0';
+
+const server = express();
+server.use(express.json());
+
+server.use('/projects', projectsRouter);
+
+server.use((req, res) => {
+  res.status(404).json({ message: 'Sorry, Route was not found' });
+});
+
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ message: 'An error occured, Please try later.' });
+});
+
+server.listen(port, host, () => {
+  console.log(`\n*** Server is listning on http://${host}:${port} ***\n`);
+});
