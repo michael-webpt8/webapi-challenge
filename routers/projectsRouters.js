@@ -82,4 +82,31 @@ router.put('/:id', (req, res) => {
   });
 });
 
+/**
+ * DELETE
+ *
+ */
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  projectDb.get(id).then(deleteProject => {
+    if (!deleteProject) {
+      res.status(404).json({ message: 'Sorry did not find ID to Delete' });
+    }
+    projectDb
+      .remove(id)
+      .then(removed => {
+        res.status(200).json(removed);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ errorMessage: 'Item was not removed' });
+      });
+  });
+});
+
+/**
+ * GET ID
+ * endpoint: `/project/:id`
+ */
+
 module.exports = router;
