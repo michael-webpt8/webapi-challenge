@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ message: 'server error retrieving Projects' });
+      next(err);
     });
 });
 
@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.status(500).json({ errorMessage: 'Server error Posting Message' });
+      next(err);
     });
 });
 
@@ -78,9 +78,7 @@ router.put('/:id', (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res
-          .status(500)
-          .json({ errorMessage: 'Server error Updating Project Message' });
+        next(err);
       });
   });
 });
@@ -102,7 +100,7 @@ router.delete('/:id', (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ errorMessage: 'Item was not removed' });
+        next(err);
       });
   });
 });
@@ -124,9 +122,7 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res
-        .status(500)
-        .json({ errorMessage: 'Server error getting Message with ID' });
+      next(err);
     });
 });
 
