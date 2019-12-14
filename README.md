@@ -46,7 +46,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - middleware extends functionality intercepts data can mod, then send data back into the code.
 
-- [] Describe a Resource?
+- [x] Describe a Resource?
 
 - a resource is an object with a type, associated data, relationships to other resources.
 
