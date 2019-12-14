@@ -1,7 +1,10 @@
 const express = require('express');
 const projectDb = require('../data/helpers/projectModel');
+const actionsRouter = require('../routers/actionsRouter');
 
 const router = express.Router();
+
+router.use('/', actionsRouter);
 
 /**
  * GET
