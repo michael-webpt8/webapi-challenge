@@ -35,8 +35,9 @@ router.get('/:id/actions', (req, res) => {
  * UPDATE
  * ENDPOINT: `/projects/:id/actions`
  */
-router.put('/:id/actions', (req, res) => {
+router.put('/:id/actions/:actionId', (req, res) => {
   const id = req.params.id;
+  const actionId = req.params.actionId;
   actionDb.get(id).then(post => {
     if (!post) {
       return res.status(404).json({ message: 'ID not found' });
@@ -48,8 +49,21 @@ router.put('/:id/actions', (req, res) => {
       return res.status(400).json({ message: 'Notes required' });
     }
     const updateAction = {
-      project_
+      project_id: actionId,
+      description: req.body.description,
+      notes: req.body.notes,
+      completed: req.body.completed || false
     };
+
+    actionDb
+      .update(actionId, updateAction)
+      .then(success => {
+        res.status(201).json(success);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({ errorMessage: 'Server error on Update' });
+      });
   });
 });
 
