@@ -26,7 +26,7 @@ router.get('/:id/actions', (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ errorMessage: 'Error getting Action Message' });
+        next(err);
       });
   });
 });
@@ -62,7 +62,7 @@ router.put('/:id/actions/:actionId', (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ errorMessage: 'Server error on Update' });
+        next(500);
       });
   });
 });
@@ -97,9 +97,7 @@ router.post('/:id/actions', (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res
-          .status(500)
-          .json({ errorMessage: 'server error Creating Action Message' });
+        next(err);
       });
   });
 });
@@ -118,11 +116,7 @@ router.delete('/:id/actions/:actionId', (req, res) => {
       })
       .catch(err => {
         console.log(err);
-        res
-          .status(500)
-          .json({
-            errorMessage: 'Server Error Could not remove action message'
-          });
+        next(err);
       });
   });
 });
