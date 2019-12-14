@@ -121,4 +121,20 @@ router.delete('/:id/actions/:actionId', (req, res) => {
   });
 });
 
+/**
+ * cannot get working for some reason :/
+ */
+// function validateUserId(req, res, next) {
+//     const id = req.params.id;
+//     actionDb.get(id).then(post => {
+//     if (!post) {
+//       return res.status(404).json({ message: 'ID not found' });
+//     } else {
+//         req.post = post;
+//         next();
+//     }
+// }
+
+// }
+
 module.exports = router;
