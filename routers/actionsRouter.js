@@ -104,4 +104,27 @@ router.post('/:id/actions', (req, res) => {
   });
 });
 
+router.delete('/:id/actions/:actionId', (req, res) => {
+  const id = req.params.id;
+  const actionId = req.params.actionId;
+  actionDb.get(actionId).then(post => {
+    if (!post) {
+      return res.status(404).json({ message: 'ID not found' });
+    }
+    actionDb
+      .remove(actionId)
+      .then(removed => {
+        res.status(200).json(removed);
+      })
+      .catch(err => {
+        console.log(err);
+        res
+          .status(500)
+          .json({
+            errorMessage: 'Server Error Could not remove action message'
+          });
+      });
+  });
+});
+
 module.exports = router;
