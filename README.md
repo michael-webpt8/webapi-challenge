@@ -44,11 +44,17 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Describe Middleware?
 
+- middleware extends functionality intercepts data can mod, then send data back into the code.
+
 - [ ] Describe a Resource?
 
 - [ ] What can the API return to help clients know if a request was successful?
 
+- it can send back an http status code?
+
 - [ ] How can we partition our application into sub-applications?
+
+- with sub routers
 
 ## Minimum Viable Product
 
