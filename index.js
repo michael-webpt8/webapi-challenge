@@ -27,6 +27,11 @@ server.use((req, res) => {
   res.status(404).json({ message: 'Sorry, Route was not found' });
 });
 
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ message: 'An error occured, Please try later.' });
+});
+
 server.listen(port, host, () => {
   console.log(`\n*** Server is listning on http://${host}:${port} ***\n`);
 });
